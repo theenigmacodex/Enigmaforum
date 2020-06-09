@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<header class="masthead">
+      <div class="overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+                  <div class="site-heading" style="padding-bottom: 30px; padding-top: 100px;">
+                    <img class="rounded-circle account-img"  style="width: 120px;" src="{{ user.profile.image.url }}">
+                      <h1>Logged out sucessfully</h1><span class="subheading"></span></div>
+              </div>
+          </div>
+      </div>
+    </header>
+    <div class="content-section">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+    <div class="border-top pt-3">
+            <a class="btn btn-outline-info btn-sm mt-1 mb-1" href="/login/">Log back in</a>
+    </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock content %}

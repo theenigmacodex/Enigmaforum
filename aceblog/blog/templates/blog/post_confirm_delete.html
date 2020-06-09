@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+    <header class="masthead" style="background-image:url('{% static 'blog/assets/img/about-bg.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>You Sure?</h1>
+                </div>
+            </div>
+        </div>
+      </header>
+      <div class="container">
+        <div class="row">
+          <div class="content-section">
+              <form method="POST">
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                      <h2>You are about to delete {{object.title}}</h2>
+                  </fieldset>
+                  <div class="form-group">
+                      <button class="btn btn-outline-danger" type="submit">Delete</button>
+                      <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}" type="submit">Cancel</a>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>    
+{% endblock content %}

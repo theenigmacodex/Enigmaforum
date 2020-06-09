@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% crispy form form.helper %}
+{% block content %}
+    <header class="masthead" style="background-image:url('{{ user.profile.bg_img.url }}');">
+      <div class="overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+                  <div class="site-heading" style="padding-bottom: 30px; padding-top: 100px;">
+                    <img class="rounded-circle account-img"  style="width: 120px;" src="{{ user.profile.image.url }}">
+                      <h1>{{ user.username }}</h1><span class="subheading">{{ user.email }}</span></div>
+              </div>
+          </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+      
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Edit Details for {{ user.username }}</legend>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Update</button>
+              <a class="btn btn-danger btn-sm mt-1 mb-1" href="/logout">Logout</a>
+          </div>
+      </form>
+    </div>
+{% endblock content %}

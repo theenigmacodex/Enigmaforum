@@ -1,0 +1,54 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+
+{% if post.postimg %}
+      <header class="masthead" style="background-image:url('{{ post.postimg.url }}');">
+{% else %}
+      <header class="masthead" style="background-image:url('{% static 'blog/assets/img/about-bg.jpg' %}');">
+{% endif %}
+
+  <div class="overlay"></div>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto">
+              <div class="site-heading">
+                  <h1>{{ post.title }}</h1>
+                  <p class="post-meta">Posted by  <a class = "meta" href="{% url 'user-view' post.author %}">{{ post.author }}</a> on {{ post.date_posted|date:"F d , Y" }}</p>
+          </div>
+      </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-auto">
+      <!---<img class="rounded-circle article-img" src="{{object.author.profile.image.url}}">-->
+      <p>{{ post.content }}</p>
+      <!--- Post images -->
+      {% if post.postimg %}
+      <div><img src={{ post.postimg.url }} width=80% height=auto></div>
+      {% endif %}
+      {% if object.author == user %}
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-edit' object.id %}">Edit</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+      {% endif %}
+      <hr> 
+      <div>
+        <!-- Comments -->
+        <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+        <hr>
+        {% for comment in post.comments.all %}
+            <div class="comment">
+                <div class="date">{{ comment.created_date }}</div>
+                <strong>{{ comment.author }}</strong>
+                <p>{{ comment.text|safe }}</p>
+                {% if comment.commentimg %}
+                <div><img src={{ comment.commentimg.url }} width=75% height=auto></div>
+                {% endif %}
+
+            </div>
+        {% empty %}
+            <p>Such empty :o</p>
+        {% endfor %}
+      </div>
+{% endblock content %}

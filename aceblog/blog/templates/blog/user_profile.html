@@ -1,0 +1,34 @@
+
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<header class="masthead" style="background-image:url('{{ user_profile.profile.bg_img.url }}');">
+      <div class="overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+                  <div class="site-heading" style="padding-bottom: 30px; padding-top: 100px;">
+                    <img class="rounded-circle account-img"  style="width: 120px;" src="{{ user_profile.profile.image.url }}">
+                      <h1>{{ name }}</h1><span class="subheading">{{ user_profile.email }}</span></div>
+              </div>
+          </div>
+      </div>
+    </header>
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto">
+          {% for post in posts %}
+            <div class="post-preview">
+              <a href="#">
+                  <h2 class="post-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+              </a>
+              <p class="post-meta">Posted by  {{ post.author }} on {{ post.date_posted|date:"F d , Y" }}</p>
+            </div>
+          <hr> 
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+<!--   view.kwargs.username -->
