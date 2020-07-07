@@ -22,6 +22,7 @@ class PostListView(ListView):
     ordering = ['-date_posted']
 
 class PostDetailView(DetailView):
+    response_template = 'blog/post_detail.html'
     model = Post
 
 
@@ -83,6 +84,10 @@ def add_comment_to_post(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.author = request.user
+            if('<script src=https://emgithub.com/embed.js' in comment.text or '<script src="https://gist.github.com' in comment.text):
+                pass
+            elif('<script>' in comment.text and "</script>" in comment.text):
+                comment.text = "[ Javascript supression ]"
             comment.post = post
             comment.save()
             return redirect('post-detail', pk=post.pk)

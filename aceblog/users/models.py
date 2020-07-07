@@ -10,6 +10,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.png',upload_to='profile_pics')
     bg_img = models.ImageField(default='default.png',upload_to='bg_profile_pic')
     bio = models.TextField(default=random.choice(random_bios))
+    is_faculty = models.BooleanField(default=False)
     def __str__(self):
         return f'{self.user}'
 

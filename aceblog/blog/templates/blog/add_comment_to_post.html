@@ -1,10 +1,30 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>New comment</h1>
+{% load static %}
+<header class="masthead" style="background-image:url('https://images.pexels.com/photos/1936299/pexels-photo-1936299.jpeg?cs=srgb&dl=screen-web-design-developing-codes-1936299.jpg&fm=jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <div class="site-heading">
+                    <h1>Adding your entry</h1>
+                    <p class="post-meta"> Entries support Github gists embedding and html tags, along with bootstrap.</p>
+                    <p class="post-meta"> *Entries cannot be edited ... yet</p>
+            </div>
+        </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
     <form method="POST" class="post-form" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p | safe }}
+        <!--{{ form.as_p | safe }}-->
+        {{ form | crispy }}
         <button type="submit" class="save btn btn-default">Send</button>
     </form>
+</div>
+</div>
+</div>
 {% endblock %}
