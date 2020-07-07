@@ -1,0 +1,36 @@
+
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+      <header class="masthead" style="background-image:url('{% static 'blog/assets/img/about-bg.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>All discussions</h1>
+                </div>
+            </div>
+        </div>
+      </header>
+      <div class="container" >
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto">
+            <a class="btn btn-primary" href="{% url 'post-create' %}" type="submit">Start a new post</a>
+            <br>
+            <br>
+            <!--href="{% url 'post-create' %}-->
+            {% for post in posts %}
+              <div class="post-preview">
+                <a href="#">
+                    <h2 class="post-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                </a>
+                <p class="post-meta">Posted by  {{ post.author }} on {{ post.date_posted|date:"F d , Y" }}</p>
+              </div>
+            <hr> 
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+{% endblock content %}
+
