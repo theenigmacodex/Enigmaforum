@@ -38,13 +38,12 @@
       <div>
          Comments -->
         <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'add_comment_to_post' pk=post.pk %}">Add your own entry</a>
-        <br>
-        <br>
+        <p> Total no of Entries {{ post.comments.all|length }}</p>
         <br>
         {% for comment in post.comments.all %}
             <div class="comment">
-              
-                <h2 class='font-bold'><a style="color:#424242" href="{% url 'user-view' comment.author %}"><u>{{ comment.author }}</u></a></h2>
+                
+                <h2 class='font-bold'>"{{ comment.microtext }}" - <i><a style="color:#424242" href="{% url 'user-view' comment.author %}"><u>{{ comment.author }}</u></a></i>  </h2>
                 <div class="post-meta">{{ comment.created_date }}</div>
                 <p>{{ comment.text|safe }}</p>
                 {% if comment.commentimg %}

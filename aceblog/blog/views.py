@@ -25,8 +25,6 @@ class PostDetailView(DetailView):
     response_template = 'blog/post_detail.html'
     model = Post
 
-
-
 class PostCreateView(LoginRequiredMixin,CreateView):
     model = Post
     fields = ['title','content','postimg','tag']
@@ -63,13 +61,17 @@ class UserPostListView(ListView):
     model = Profile
     template_name = 'blog/user_profile.html'
     allow_empty = False  #this will show 404 if the username does not exists
+    ordering = ['-created_date']
 
     def get(self,request,*args, **kwargs):
         username = self.kwargs['username']
         user_profile = User.objects.get(username=username)
+        profile_us = Profile.objects.get(user=user_profile)
+        ispro =  profile_us.pro_user
         posts = Post.objects.filter(author = user_profile)
+        comments = Comment.objects.filter(author = user_profile)
         return render(request,'blog/user_profile.html',{'user_profile':user_profile,
-                                                        'name':username ,'posts':posts})
+                                                        'name':username ,'posts':posts , 'comments':comments,'ispro':ispro})
     
 
 class AboutPageView(ListView):

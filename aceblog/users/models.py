@@ -11,6 +11,9 @@ class Profile(models.Model):
     bg_img = models.ImageField(default='default.png',upload_to='bg_profile_pic')
     bio = models.TextField(default=random.choice(random_bios))
     is_faculty = models.BooleanField(default=False)
+    pro_user = models.BooleanField(default=False)
+    #github = models.URLField(max_length=200,verbose_name='Github/Gitlab',blank=True)
+    #comp_prog = models.URLField(max_length=200,verbose_name='Competitve Coding',help_text='Any Competitve programming profile (ProjectEuler, Hackerrank , Hackerearth ...)',blank=True)
     def __str__(self):
         return f'{self.user}'
 

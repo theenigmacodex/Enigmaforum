@@ -20,6 +20,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
+    microtext = models.CharField(max_length=20,default='Entry by me',blank=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)

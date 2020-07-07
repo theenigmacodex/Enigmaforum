@@ -9,7 +9,14 @@
               <div class="col-md-10 col-lg-8 mx-auto">
                   <div class="site-heading" style="padding-bottom: 30px; padding-top: 100px;">
                     <img class="rounded-circle account-img"  style="width: 120px;" src="{{ user_profile.profile.image.url }}">
-                      <h1>{{ name }}</h1><span class="subheading">{{ user_profile.email }}</span></div>
+                      {% if ispro %}
+                          <div>
+                          <h1>{{ name }}</h1><span class="subheading">{{ user_profile.email }}</span></div>
+                          <p class='post-meta' style="color:#ffffff;"> <i class="fa fa-star"> </i> Premium </p>
+                          </div>
+                      {% else %}
+                          <h1>{{ name }}</h1><span class="subheading">{{ user_profile.email }}</span></div>
+                      {% endif %}
               </div>
           </div>
       </div>
@@ -17,6 +24,29 @@
     <div class="container" >
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto">
+          <h1 style="color:#616161"><u>Entries Posted:</u>  </h1>
+          <br>
+          {% for comment in comments %}
+            <div class="post-preview">
+              <a href="#">
+                  <h2 class="post-title"><a href="{% url 'post-detail' comment.post.id %}">{{ comment.microtext }}</a></h2>
+              </a>
+              <p class="post-meta">Posted to <b><a href="{% url 'post-detail' comment.post.id %}">{{ comment.post.title }}</a> on {{ comment.created_date|date:"F d , Y" }}</b></p>
+            </div>
+          <br> 
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto">
+          <h1 style="color:#616161"> <u>Challenges Posted:</u> </h1>
+          <br>
+
           {% for post in posts %}
             <div class="post-preview">
               <a href="#">
@@ -24,7 +54,6 @@
               </a>
               <p class="post-meta">Posted by  {{ post.author }} on {{ post.date_posted|date:"F d , Y" }}</p>
             </div>
-          <hr> 
           {% endfor %}
         </div>
       </div>
