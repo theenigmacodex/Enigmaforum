@@ -10,7 +10,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     tag = models.CharField(max_length=20,default='general')
-    postimg = models.ImageField(default='',upload_to='post_pics',verbose_name='Post Image',blank=True)
+    postimg = models.ImageField(default='defpost.png',upload_to='post_pics',verbose_name='Post Image',blank=False)
 
     def __str__(self):
         return self.title

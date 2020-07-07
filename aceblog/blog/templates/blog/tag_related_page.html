@@ -13,19 +13,23 @@
         </div>
       </header>
       <div class="container" >
-        <div class="row">
+        {% for post in posts %}
+        <div class="row" style="background-image:url('{{ post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;">
           <div class="col-md-10 col-lg-8 mx-auto">
-            {% for post in posts %}
+            <br>
+            <div class="row" style="background-image:url('{{ post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;"></div>
               <div class="post-preview">
                 <a href="#">
-                    <h2 class="post-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                    <h2 class="post-title" style="color:#ffffff"><a style="color:#ffffff" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
                 </a>
-                <p class="post-meta">  Posted in <a style="color:#616161" href="{% url 'tag-view' post.tag %}"><i>#{{ post.tag }}</i></a> by <a style="color:#616161" class = "post-meta" href="{% url 'user-view' post.author %}">{{ post.author }}</a> on {{ post.date_posted|date:"F d , Y" }}</p>
+                <p class="post-meta" style="color:#ffffff">  Posted in <a style="color:#ffffff" href="{% url 'tag-view' post.tag %}"><i>#{{ post.tag }}</i></a> by <a style="color:#fffff" class = "post-meta" href="{% url 'user-view' post.author %}">{{ post.author }}</a> on {{ post.date_posted|date:"F d , Y" }}</p>
               </div>
             <hr> 
-            {% endfor %}
           </div>
         </div>
+        <br>
+            {% endfor %}
+
       </div>
 {% endblock content %}
 

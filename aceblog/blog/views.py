@@ -68,10 +68,11 @@ class UserPostListView(ListView):
         user_profile = User.objects.get(username=username)
         profile_us = Profile.objects.get(user=user_profile)
         ispro =  profile_us.pro_user
+        githubusr = profile_us.github
         posts = Post.objects.filter(author = user_profile)
         comments = Comment.objects.filter(author = user_profile)
         return render(request,'blog/user_profile.html',{'user_profile':user_profile,
-                                                        'name':username ,'posts':posts , 'comments':comments,'ispro':ispro})
+                                                        'name':username ,'posts':posts , 'comments':comments,'ispro':ispro,'githubusr':githubusr})
     
 
 class AboutPageView(ListView):

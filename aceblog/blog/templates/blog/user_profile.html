@@ -9,14 +9,12 @@
               <div class="col-md-10 col-lg-8 mx-auto">
                   <div class="site-heading" style="padding-bottom: 30px; padding-top: 100px;">
                     <img class="rounded-circle account-img"  style="width: 120px;" src="{{ user_profile.profile.image.url }}">
-                      {% if ispro %}
-                          <div>
+                    <div>
                           <h1>{{ name }}</h1><span class="subheading">{{ user_profile.email }}</span></div>
-                          <p class='post-meta' style="color:#ffffff;"> <i class="fa fa-star"> </i> Premium </p>
-                          </div>
-                      {% else %}
-                          <h1>{{ name }}</h1><span class="subheading">{{ user_profile.email }}</span></div>
-                      {% endif %}
+                        <br>
+                          <div class="github-card" data-github="{{ githubusr }}" data-width=auto data-height="" data-theme="default"></div>
+                      <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+                    </div>
               </div>
           </div>
       </div>
