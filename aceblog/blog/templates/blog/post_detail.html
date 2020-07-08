@@ -125,15 +125,36 @@ $(window).scroll(function() {
       <hr> 
       <div>
          Comments -->
+         <p> Total no of Entries {{ post.comments.all|length }}</p>
         <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'add_comment_to_post' pk=post.pk %}">Add your own entry</a>
-        <p> Total no of Entries {{ post.comments.all|length }}</p>
+        
+        <br>
+        <br>
+        <hr>
         <br>
         {% for comment in post.comments.all %}
             <div class="comment">
-              
-                <h2 class='font-bold'>"{{ comment.microtext }}" - <i><a style="color:#424242" href="{% url 'user-view' comment.author %}"><u>{{ comment.author }}</u></a></i>  </h2>
-                <div class="post-meta">{{ comment.created_date }}</div>
+              <a href="{% url 'user-view' comment.author %}">
+              <div href="{% url 'user-view' comment.author %}" style="background-image:url('{{ comment.author.profile.bg_img.url }}');border-radius:15px;background-repeat: no-repeat;background-size: 100%;background-position: center;padding-left: 20px;padding-top: 25px;padding-bottom: -5; ">
+                <table style="margin-left: auto;
+                margin-right: auto; padding: 10px;">
+                  <tr>
+                    <th><img class="rounded-circle account-img"  style="width: 120px; height: 120px;" src="{{ comment.author.profile.image.url }}"></th>
+                    <th>  </th>
+                    <th style="padding: 20px;">
+                      <div>
+
+                        <h2 class='font-bold' style="color:#ffffff">"{{ comment.microtext }}" - <i><u>{{ comment.author }}</u></i>  </h2>
+                        <div style="color:#ffffff" class="post-meta">{{ comment.created_date }}</div>
+                      </div>
+                    </th>
+                  </tr>
+                </table>
+              </a>
+                
                 <br>
+              </div>
+                
                 {% if comment.author == user %}
                 <a class="btn btn-disabled btn-sm mt-1 mb-1">Editing comming soon</a>
                 {% endif %}
