@@ -20,6 +20,10 @@ from django.urls import path,include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 from blog.views import UserPostListView,TagPostListView
+from django.views.defaults import page_not_found
+
+def custom_page_not_found(request):
+    return page_not_found(request, None)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,9 +34,12 @@ urlpatterns = [
     path('',include('blog.urls')),
     path('u/<str:username>/',UserPostListView.as_view(),name="user-view"),
     path('tag/<str:tag>/',TagPostListView.as_view(),name="tag-view"),
+    path("404/", custom_page_not_found),
     
 ]
 
 if(settings.DEBUG):
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+
 

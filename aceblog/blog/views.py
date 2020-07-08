@@ -111,3 +111,25 @@ class TagPostListView(ListView):
         return render(request,'blog/tag_related_page.html',{'tag':the_tag,
                                                         'posts':posts})
     
+class CommentUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = Comment
+    template_name = 'blog/add_comment_to_post.html'
+    fields = ['githubrepo','microtext','text','commentimg']
+
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        comment = self.get_object()
+        if(self.request.user == comment.author):
+            return True
+        return False
+
+def anime(request):
+    context = {
+        'posts': Post.objects.all() ,
+        'title':"ACE Students",
+        'user':User.objects.all()
+    }
+    return render(request,'https://raw.githubusercontent.com/itspacchu/pacchu-forum/master/misc.html',context)

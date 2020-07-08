@@ -1,6 +1,94 @@
-{% extends "blog/base.html" %}
 {% load static %}
-{% block content %}
+
+<!---nevo-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/assets/pacchu.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="{% static 'blog/assets/fonts/font-awesome.min.css' %}">
+</head>
+<style>
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #ffffff00;
+}
+
+/* The progress container (grey background) */
+.progress-container {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0);
+}
+
+/* The progress bar (scroll indicator) */
+.progress-bar {
+  height: 5px;
+  background: #839aff;
+  width: 0%;
+}
+
+.sidebar.affix{
+    position:fixed;
+    top:0;
+    right:0;
+}
+</style>
+
+<div class="header">
+  <div class="progress-bar" id="myBar"></div>
+</div>
+
+<script>
+  window.onscroll = function() {myFunction()};
+
+function myFunction() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+}
+
+var stickySidebar = $('.sidebar').offset().top;
+
+$(window).scroll(function() {  
+    if ($(window).scrollTop() > stickySidebar) {
+        $('.sidebar').addClass('affix');
+    }
+    else {
+        $('.sidebar').removeClass('affix');
+    }  
+});
+</script>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand" href="{% url 'blog-home' %}">CollectiveEnigma</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div
+                class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'blog-home' %}">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'add_comment_to_post' pk=post.pk %}">New Entry</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'profile' %}">{{ user }}</a></li>
+                {% else %}
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+                </ul>
+        </div>
+        </div>
+        
+    </nav>
 
 {% if post.postimg %}
       <header class="masthead" style="background-image:url('{{ post.postimg.url }}');">
@@ -42,9 +130,18 @@
         <br>
         {% for comment in post.comments.all %}
             <div class="comment">
-                
+              
                 <h2 class='font-bold'>"{{ comment.microtext }}" - <i><a style="color:#424242" href="{% url 'user-view' comment.author %}"><u>{{ comment.author }}</u></a></i>  </h2>
                 <div class="post-meta">{{ comment.created_date }}</div>
+                <br>
+                {% if comment.author == user %}
+                <a class="btn btn-disabled btn-sm mt-1 mb-1">Editing comming soon</a>
+                {% endif %}
+                <br>
+                <div>
+                  <div class="github-card" data-github="{{comment.githubrepo}}" data-width="400" data-height="" data-theme="default"></div>
+                  <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+                </div>
                 <p>{{ comment.text|safe }}</p>
                 {% if comment.commentimg %}
                 <div><img src={{ comment.commentimg.url }} width=75% height=auto></div>
@@ -57,4 +154,20 @@
             <h1> No one posted yet ... welp!</h1>
         {% endfor %}
       </div>
-{% endblock content %}
+    </div>
+  </div>
+      <footer>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-10 col-lg-8 mx-auto">
+                      <p class="text-muted copyright"><a href='https://github.com/itspacchu'>Created by Prashant Nandipati</a></p>
+                  </div>
+              </div>
+          </div>
+      </footer>
+      <script src="{% static 'blog/assets/js/jquery.min.js' %}"></script>
+      <script src="{% static 'blog/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'blog/assets/js/script.min.js' %}"></script>
+  </body>
+  
+  </html>

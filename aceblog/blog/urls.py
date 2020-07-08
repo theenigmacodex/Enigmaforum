@@ -10,5 +10,6 @@ urlpatterns = [
     path('post/new/',PostCreateView.as_view(),name="post-create"),
     path('about/',AboutPageView.as_view(),name="blog-about"),
     path('post/<int:pk>/entry/', views.add_comment_to_post, name='add_comment_to_post'),
+    path('post/<int:pk>/entry/edit', CommentUpdateView, name='edit_comment_on_post'),
 ]
 

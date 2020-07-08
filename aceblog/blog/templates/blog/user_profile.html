@@ -22,14 +22,16 @@
     <div class="container" >
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto">
-          <h1 style="color:#616161"><u>Entries Posted:</u>  </h1>
+          <h1 style="color:#616161">Entries Posted: </h1>
           <br>
           {% for comment in comments %}
-            <div class="post-preview">
-              <a href="#">
-                  <h2 class="post-title"><a href="{% url 'post-detail' comment.post.id %}">{{ comment.microtext }}</a></h2>
+          <div class="post-preview" style="background-image:url('{{ comment.post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;padding-left: 30px;">
+            <br>
+            <a href="#">
+                  <h2 class="post-title"><a style="color:white;" href="{% url 'post-detail' comment.post.id %}">{{ comment.microtext }}</a></h2>
               </a>
-              <p class="post-meta">Posted to <b><a href="{% url 'post-detail' comment.post.id %}">{{ comment.post.title }}</a> on {{ comment.created_date|date:"F d , Y" }}</b></p>
+              <p class="post-meta" style="color:white;">Posted to <b><a style="color:white;" href="{% url 'post-detail' comment.post.id %}">{{ comment.post.title }}</a> on {{ comment.created_date|date:"F d , Y" }}</b></p>
+              <br>
             </div>
           <br> 
           {% endfor %}
@@ -42,16 +44,19 @@
     <div class="container" >
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto">
-          <h1 style="color:#616161"> <u>Challenges Posted:</u> </h1>
+          <h1 style="color:#616161"> Challenges Posted: </h1>
           <br>
 
           {% for post in posts %}
-            <div class="post-preview">
+            <div class="post-preview" style="background-image:url('{{ post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;padding-left: 30px;">
+            <br>
               <a href="#">
-                  <h2 class="post-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                  <h2 class="post-title"><a style="color:white;" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
               </a>
-              <p class="post-meta">Posted by  {{ post.author }} on {{ post.date_posted|date:"F d , Y" }}</p>
+              <p class="post-meta" style="color:white;">Posted by  {{ post.author }} on {{ post.date_posted|date:"F d , Y" }}</p>
+              <br>
             </div>
+            <br>
           {% endfor %}
         </div>
       </div>

@@ -7,4 +7,4 @@ class CommentForm(forms.ModelForm):
     commentimg = forms.ImageField(required=False)
     class Meta:
         model = Comment
-        fields = ('text','commentimg','microtext')
+        fields = ('githubrepo','text','commentimg','microtext')

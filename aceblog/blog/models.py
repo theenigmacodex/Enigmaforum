@@ -10,7 +10,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     tag = models.CharField(max_length=20,default='general')
-    postimg = models.ImageField(default='defpost.png',upload_to='post_pics',verbose_name='Post Image',blank=False)
+    postimg = models.ImageField(default='defback.png',upload_to='post_pics',verbose_name='Post Image',blank=False)
 
     def __str__(self):
         return self.title
@@ -23,6 +23,7 @@ class Comment(models.Model):
     microtext = models.CharField(max_length=20,default='Entry by me',blank=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     text = models.TextField()
+    githubrepo = models.CharField(max_length=200,verbose_name="Github repo",blank=True,help_text="Supported User/User-Repo")
     created_date = models.DateTimeField(default=timezone.now)
     commentimg = models.ImageField(default='',upload_to='comment_img',verbose_name='Comment Image')
 
@@ -31,4 +32,4 @@ class Comment(models.Model):
         self.save()
 
     def __str__(self):
-        return self.text
+        return self.microtext
