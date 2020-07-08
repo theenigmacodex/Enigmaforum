@@ -125,10 +125,19 @@ $(window).scroll(function() {
       <hr> 
       <div>
          Comments -->
-         <p> Total no of Entries {{ post.comments.all|length }}</p>
-        <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'add_comment_to_post' pk=post.pk %}">Add your own entry</a>
+         <table>
+           <tr>
+             <th>
+              <p> Total no of Entries {{ post.comments.all|length }}</p>
+             </th>
+             <th style="padding: 20px;">
+              <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'add_comment_to_post' pk=post.pk %}">Add your own entry</a>
+             </th>
+           </tr>
+         </table>
         
-        <br>
+        
+        
         <br>
         <hr>
         <br>
