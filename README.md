@@ -1,4 +1,4 @@
 # Pacchu Forum base
-L CollectiveEnigma
-L Edoc project
+* CollectiveEnigma
+* Edoc project
 
