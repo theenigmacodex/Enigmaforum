@@ -1,2 +1,2 @@
-# ace-hub-project
- ace hub project
+# CollectiveEnigmaProject
+Personal-ish blog for posting blogs :)
